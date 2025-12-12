@@ -142,3 +142,78 @@ Quality metrics to maintain:
 - RAG retrieval: Precision@10, Recall@10, MRR
 - Answer quality: LLM-as-a-Judge scoring (target: 4.0/5.0 average)
 - Load testing: 500 concurrent users, 100 RPS baseline
+
+## Build and Run Commands
+
+### Backend (FastAPI)
+```bash
+cd backend
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run development server
+uvicorn app.main:app --reload --port 8000
+
+# Run database migrations
+alembic upgrade head
+
+# Run Celery worker
+celery -A app.workers.celery_app worker --loglevel=info
+
+# Run Celery beat (scheduler)
+celery -A app.workers.celery_app beat --loglevel=info
+```
+
+### Frontend (Next.js)
+```bash
+cd frontend
+
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Type check
+npm run type-check
+```
+
+### Docker (Full Stack)
+```bash
+# Start all services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f backend
+
+# Stop all services
+docker-compose down
+```
+
+## Project Structure
+
+```
+Bio2/
+├── backend/
+│   ├── app/
+│   │   ├── api/v1/          # API endpoints
+│   │   ├── core/            # Config, database, security
+│   │   ├── models/          # SQLAlchemy models
+│   │   ├── schemas/         # Pydantic schemas
+│   │   ├── services/        # Business logic
+│   │   └── workers/         # Celery tasks
+│   ├── alembic/             # Database migrations
+│   └── requirements.txt
+├── frontend/
+│   ├── src/
+│   │   ├── components/      # React components
+│   │   ├── pages/           # Next.js pages
+│   │   ├── hooks/           # Custom React hooks
+│   │   ├── services/        # API client
+│   │   └── styles/          # CSS/Tailwind
+│   └── package.json
+└── docker-compose.yml

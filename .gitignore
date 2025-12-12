@@ -1,0 +1,89 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Database
+*.db
+*.sqlite3
+
+# Vector database
+chroma_db/
+
+# Logs
+*.log
+logs/
+
+# Cache
+.cache/
+*.cache
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Next.js
+.next/
+out/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.tar
+
+# Jupyter
+.ipynb_checkpoints/
+
+# ML Models cache
+*.pt
+*.bin
+*.onnx
+
+# Temporary files
+tmp/
+temp/
