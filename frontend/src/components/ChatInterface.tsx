@@ -24,6 +24,7 @@ export default function ChatInterface({ initialQuestion }: ChatInterfaceProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const initialSubmitted = useRef(false);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -34,7 +35,8 @@ export default function ChatInterface({ initialQuestion }: ChatInterfaceProps) {
   }, [messages]);
 
   useEffect(() => {
-    if (initialQuestion) {
+    if (initialQuestion && !initialSubmitted.current) {
+      initialSubmitted.current = true;
       handleSubmit(new Event('submit') as unknown as FormEvent);
     }
   }, []);
