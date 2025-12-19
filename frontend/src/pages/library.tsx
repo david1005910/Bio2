@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { BookOpen, Search, Loader2, ExternalLink, Trash2, FolderOpen, Sparkles } from 'lucide-react';
 import Layout from '@/components/Layout';
-import { api } from '@/services/api';
+import { papersApi } from '@/services/api';
 import { useAuth } from '@/hooks/useAuth';
 import Link from 'next/link';
 
@@ -33,7 +33,7 @@ export default function LibraryPage() {
       setIsLoading(true);
       setError(null);
       try {
-        const data = await api.getSavedPapers();
+        const data = await papersApi.getSaved();
         setPapers(data.papers || []);
       } catch (err) {
         setError('Failed to load your library. Please try again later.');
@@ -48,7 +48,7 @@ export default function LibraryPage() {
 
   const handleRemovePaper = async (pmid: string) => {
     try {
-      await api.removeSavedPaper(pmid);
+      await papersApi.unsave(pmid);
       setPapers(papers.filter(p => p.pmid !== pmid));
     } catch (err) {
       console.error('Error removing paper:', err);

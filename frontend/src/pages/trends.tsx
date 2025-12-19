@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { TrendingUp, Calendar, Loader2, BarChart3, Sparkles } from 'lucide-react';
 import Layout from '@/components/Layout';
-import { api } from '@/services/api';
+import { analyticsApi } from '@/services/api';
 
 interface KeywordTrend {
   keyword: string;
@@ -27,7 +27,7 @@ export default function TrendsPage() {
       setIsLoading(true);
       setError(null);
       try {
-        const data = await api.getKeywordTrends({ period, limit: 20 });
+        const data = await analyticsApi.getKeywordTrends({ aggregation: period === 'week' ? 'weekly' : period === 'month' ? 'monthly' : 'yearly' });
         setTrends(data);
       } catch (err) {
         setError('Failed to load trends. Please try again later.');

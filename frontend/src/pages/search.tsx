@@ -61,7 +61,7 @@ export default function SearchPage() {
       return;
     }
     await papersApi.save(pmid);
-    setSavedPapers((prev) => new Set([...prev, pmid]));
+    setSavedPapers((prev) => new Set(Array.from(prev).concat(pmid)));
   };
 
   const handleUnsave = async (pmid: string) => {
